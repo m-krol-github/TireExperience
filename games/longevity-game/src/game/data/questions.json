@@ -1,0 +1,25 @@
+
+{
+  "questions": [
+    {
+      "title": "What is the capital of France?",
+      "answers": ["Paris", "London"],
+      "correct": "0"
+    },
+    {
+      "title": "Who painted the Mona Lisa?",
+      "answers": ["Leonardo da Vinci", "Pablo Picasso"],
+      "correct": "0"
+    },
+    {
+      "title": "What is the largest planet in our solar system?",
+      "answers": ["Saturn", "Jupiter"],
+      "correct": "1"
+    },
+    {
+      "title": "What is the best tire in the world?",
+      "answers": ["Michelin", "Pirelli"],
+      "correct": "0"
+    }
+  ]
+}

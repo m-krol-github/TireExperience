@@ -1,0 +1,23 @@
+# Ignore build output directories
+dist
+.next
+.husky
+.nx
+.vscode
+.yarn
+
+# Ignore specific files
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitignore
+.nvmrc
+.prettierrc
+.yarnrc.yml
+
+# Ignore specific file types if needed
+*.commit
+*.hash
+*.log
+*.json
+*.node

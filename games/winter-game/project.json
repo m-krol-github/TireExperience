@@ -1,0 +1,9 @@
+{
+  "name": "winter-game",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "games/winter-game/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project winter-game --web",
+  "targets": {}
+}

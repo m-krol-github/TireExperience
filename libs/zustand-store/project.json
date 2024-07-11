@@ -1,0 +1,9 @@
+{
+  "name": "zustand-store",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/zustand-store/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project zustand-store --web",
+  "targets": {}
+}

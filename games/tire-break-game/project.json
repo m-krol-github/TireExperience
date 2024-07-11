@@ -1,0 +1,9 @@
+{
+  "name": "tire-break-game",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "games/tire-break-game/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project tire-break-game --web",
+  "targets": {}
+}

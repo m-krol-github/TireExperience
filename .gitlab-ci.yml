@@ -1,0 +1,80 @@
+stages:
+  - build
+  - deploy
+
+default:
+  image: node:20.12.2
+
+build_app:
+  rules:
+    - if: "$CI_COMMIT_BRANCH =~ /^main$/"
+  tags:
+    - c4e
+  stage: build
+  script:
+    - apt-get update
+    - apt-get -y install zip
+    - mkdir artifacts_appservice
+    - mkdir artifacts_staticwebsite
+
+    #the folder content build/appservice will be zip and deploy as azure app service
+    # - mkdir -p build/appservice
+    #put build command here
+    - yarn
+    - /bin/sh -c "yarn build"
+    #end build command here
+    - cp -r $CI_PROJECT_DIR/apps/tire-test-experience/.next/static $CI_PROJECT_DIR/apps/tire-test-experience/.next/standalone/apps/tire-test-experience/.next && cp -r $CI_PROJECT_DIR/apps/tire-test-experience/public $CI_PROJECT_DIR/apps/tire-test-experience/.next/standalone/apps/tire-test-experience
+    - cd $CI_PROJECT_DIR/apps/tire-test-experience/.next/standalone; zip -9 -r $CI_PROJECT_DIR/artifacts_appservice/appservice.zip .
+
+    #the folder content build/static will be zip and deploy to storage account
+    # - mkdir -p $CI_PROJECT_DIR/build/static
+    #put build command here
+    #end build command here
+    - cd $CI_PROJECT_DIR/apps/tire-test-experience/.next/static; zip -9 -r $CI_PROJECT_DIR/artifacts_staticwebsite/static.zip .
+    - cd $CI_PROJECT_DIR
+
+    - ls -l artifacts_appservice/
+    - ls -l artifacts_staticwebsite/
+  artifacts:
+    paths:
+      - artifacts_appservice/
+      - artifacts_staticwebsite/
+    when: always
+
+deploy_to_azure:
+  rules:
+    - if: "$CI_COMMIT_BRANCH =~ /^main$/"
+  tags:
+    - c4e
+  stage: deploy
+  image: mcr.microsoft.com/azure-cli
+  script:
+    - az login --service-principal -t $SP_TENANT_ID -u $SP_CLIENT_ID -p $SP_CLIENT_SECRET
+    - ls -l
+    - ls -l artifacts_appservice
+    - ls -l artifacts_staticwebsite
+
+    #deploy static file
+    - wget https://aka.ms/downloadazcopy-v10-linux -O azure.tar -q
+    - tar -xf azure.tar --strip-components=1
+    - cd artifacts_staticwebsite
+    - unzip static.zip
+    - ls -l
+    - export AZCOPY_AUTO_LOGIN_TYPE=SPN
+    - export AZCOPY_SPA_APPLICATION_ID=$SP_CLIENT_ID
+    - export AZCOPY_SPA_CLIENT_SECRET=$SP_CLIENT_SECRET
+    - export AZCOPY_TENANT_ID=$SP_TENANT_ID
+    - $CI_PROJECT_DIR/azcopy copy --exclude-path static.zip ./ 'https://stdentsudevwe01.blob.core.windows.net/$web/static/?' --recursive=true --as-subdir=false
+
+    # deploy app service
+    - az webapp deploy -n ase-dentsu-dev-we-01 -g RG-DENTSU-DEV  --src-path $CI_PROJECT_DIR/artifacts_appservice/appservice.zip --type zip --clean true
+    # - az deployment group validate --template-file deploy_api.json -g RG-DENTSU-DEV -p ApiManagmentServiceName=apim-dentsu--dev-we-01
+    # - az deployment group create -g RG-DENTSU-DEV -n deploy_api -p ApiManagmentServiceName=test -f deploy_api.json
+
+build_merge_request:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  script:
+    - yarn install
+    - yarn test-all

@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Source Husky
+. "$(dirname "$0")/_/husky.sh"
+
+# Run lint-staged to check staged files
+npx lint-staged
+
+yarn format
+
+echo '🏗️👷 Styling, testing, and building your project before committing'
+# Check Prettier standards
+yarn check-format || (
+    echo '🤢🤮🤢🤮 Oh no! Your styling is off. Run yarn format, add changes, and try committing again.'
+    false
+)
+
+# Check ESLint standards
+yarn check-lint || (
+    echo '😤🏀👋😤 Your code needs some cleanup. Run ESLint fixes, add changes, and try to commit again.'
+    false
+)
+
+# Check TypeScript standards
+yarn check-types || (
+    echo '🤡😂❌🤡 TypeScript check failed. Make the necessary changes and try committing again.'
+    false
+)
+
+# Run tests
+yarn test || (
+   echo '❌🧪⛔ Tests failed. Fix failing tests and try committing again.'
+   false
+)
+
+# If everything passes, allow the commit
+echo '👍✨✨ Code looks good! Proceeding with the commit... ✨✨👍'
+
+echo '✅✅✅✅ Committing changes now... ✅✅✅✅'

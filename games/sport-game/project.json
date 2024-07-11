@@ -1,0 +1,9 @@
+{
+  "name": "sport-game",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "games/sport-game/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project sport-game --web",
+  "targets": {}
+}

@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@tire-test/efficiency-game": ["games/efficiency-game/src/index.ts"],
+      "@tire-test/example-game": ["games/example-game/src/index.ts"],
+      "@tire-test/longevity-game": ["games/longevity-game/src/index.ts"],
+      "@tire-test/sport-game": ["games/sport-game/src/index.ts"],
+      "@tire-test/tire-break-game": ["games/tire-break-game/src/index.ts"],
+      "@tire-test/winter-game": ["games/winter-game/src/index.ts"],
+      "@tire-test/zustand-store": ["libs/zustand-store/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"],
+  "include": ["apps/**/*", "libs/**/*", "games/**/*"]
+}

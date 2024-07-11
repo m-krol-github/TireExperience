@@ -1,0 +1,17 @@
+
+{
+  "questions": [
+    {
+      "question": "What is the capital of France?",
+      "answers": ["Paris", "London"]
+    },
+    {
+      "question": "Who painted the Mona Lisa?",
+      "answers": ["Leonardo da Vinci", "Pablo Picasso"]
+    },
+    {
+      "question": "What is the largest planet in our solar system?",
+      "answers": ["Jupiter", "Saturn"]
+    }
+  ]
+}

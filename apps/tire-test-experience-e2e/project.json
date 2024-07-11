@@ -1,0 +1,8 @@
+{
+  "name": "tire-test-experience-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/tire-test-experience-e2e/src",
+  "implicitDependencies": ["tire-test-experience"],
+  "// targets": "to see all targets run: nx show project tire-test-experience-e2e --web",
+  "targets": {}
+}

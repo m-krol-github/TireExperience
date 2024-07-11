@@ -1,0 +1,9 @@
+{
+  "name": "example-game",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "games/example-game/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project example-game --web",
+  "targets": {}
+}

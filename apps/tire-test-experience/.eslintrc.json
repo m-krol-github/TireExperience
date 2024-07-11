@@ -1,0 +1,130 @@
+{
+  "plugins": ["unicorn"],
+  "extends": [
+    "plugin:@nx/react-typescript",
+    "next",
+    "next/core-web-vitals",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:regexp/recommended",
+    "../../.eslintrc.json"
+  ],
+  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": [
+          "apps/tire-test-experience/tsconfig.json",
+          "libs/tsconfig.json"
+        ]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": [
+          "error",
+          "apps/tire-test-experience/pages"
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": ["**/*.[jt]s?(x)"],
+      "extends": ["plugin:sonarjs/recommended"],
+      "rules": {
+        "sonarjs/no-duplicate-string": 0
+      }
+    }
+  ],
+  "rules": {
+    "no-console": 1,
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "index",
+          "object",
+          "type"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "curly": 2,
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": ["block-like"], "next": "*" },
+      { "blankLine": "always", "prev": ["*"], "next": ["block-like"] }
+    ],
+    "newline-before-return": 2,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/ban-ts-comment": 1,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_|req|res|next|err|ctx|args|context|info"
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": 1,
+    "jsx-a11y/no-static-element-interactions": 1,
+    "jsx-a11y/anchor-is-valid": 1,
+    "jsx-a11y/alt-text": [
+      2,
+      {
+        "elements": ["img", "object", "area", "input[type='image']"],
+        "object": ["Object"],
+        "area": ["Area"],
+        "input[type='image']": ["InputImage"]
+      }
+    ],
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "unicorn/prefer-query-selector": 1,
+    "unicorn/no-negated-condition": 1,
+    "unicorn/prefer-switch": 1,
+    "unicorn/better-regex": 1,
+    "unicorn/prefer-number-properties": 1,
+    "unicorn/catch-error-name": 1,
+    "unicorn/prefer-optional-catch-binding": 1,
+    "unicorn/switch-case-braces": 1,
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "react/jsx-no-useless-fragment": 2,
+    "react/no-unstable-nested-components": 2
+  }
+}

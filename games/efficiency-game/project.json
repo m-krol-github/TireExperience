@@ -1,0 +1,9 @@
+{
+  "name": "efficiency-game",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "games/efficiency-game/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project efficiency-game --web",
+  "targets": {}
+}
